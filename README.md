@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/readme/laravel-logo.png" height="220" alt="Laravel Logo">
+  <img src="public/readme/laravel-logo.png" height="240" alt="Laravel Logo">
   &nbsp;&nbsp;&nbsp;
   <img src="public/readme/gemini-logo.png" height="200" alt="Google Gemini Logo">
 </p>
