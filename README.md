@@ -1,9 +1,3 @@
-<p align="center">
-  <img src="public/readme/laravel-logo.png" height="230" alt="Laravel Logo">
-  &nbsp;&nbsp;&nbsp;
-  <img src="public/readme/gemini-logo.png" height="200" alt="Google Gemini Logo">
-</p>
-
 <h1 align="center">Career Helper — AI-Driven Career Optimization Platform</h1>
 
 <p align="center">
