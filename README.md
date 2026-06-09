@@ -1,86 +1,71 @@
-<div align="center">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="220" alt="Laravel Logo">
+  <span style="font-size: 30px; margin: 0 20px; position: relative; top: -15px;">✕</span>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" width="200" alt="Google Gemini Logo">
+</p>
 
-<table>
-  <tr>
-    <td align="center" width="160">
-      <img src="https://cdn.simpleicons.org/laravel/FF2D20" width="90" alt="Laravel Logo" />
-    </td>
-    <td align="center" width="160">
-      <img src="https://cdn.simpleicons.org/googlegemini/8E75B2" width="90" alt="Google Gemini AI Logo" />
-    </td>
-  </tr>
-</table>
+<h1 align="center">Career Helper — AI-Driven Career Optimization Platform</h1>
 
-# Career Helper — AI-Powered Career Analysis Platform
+<p align="center">
+  A sophisticated web application built on the TALL Stack, leveraging Google Gemini AI to analyze CVs and provide deep career insights.
+</p>
 
-Career Helper is a modern career analysis web application powered by **Laravel** and **Google Gemini AI**.  
-It helps users understand their skills, analyze their CV, receive AI-based career recommendations, and track their career growth over time.
-
-<br>
-
-![Build](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
-![Laravel](https://img.shields.io/badge/Laravel-Framework-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![Gemini AI](https://img.shields.io/badge/Gemini_AI-Integrated-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Ready-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind">
+  <img src="https://img.shields.io/badge/Google_Gemini-8E75FF?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini AI">
+</p>
 
 ---
 
-## 📌 Project Overview
+## Overview
 
-**Career Helper** is an AI-powered career analysis platform designed to help users evaluate their career readiness, understand their strengths and weaknesses, improve their CV, and receive personalized career recommendations.
+**Career Helper** is an AI-driven career optimization platform designed to help users understand their professional profile, evaluate their CV, and receive tailored career recommendations through intelligent automation.
 
-The application is built with the **TALL Stack**:
+The platform bridges the gap between job seekers and modern AI technology by combining Laravel’s robust backend architecture with reactive, user-friendly interfaces powered by Livewire and Alpine.js. At its core, **Google Gemini AI** functions as the reasoning engine that interprets user data, identifies competency gaps, analyzes career readiness, and generates actionable development recommendations.
 
-- **Laravel** as the backend framework.
-- **Livewire** as the reactive frontend engine.
-- **Tailwind CSS** as the styling system.
-- **Alpine.js** for lightweight frontend interactivity.
-
-At the center of the application is **Google Gemini AI**, which acts as the intelligence engine. Gemini processes user inputs such as skills, experience, education, target role, work preference, location, CV content, projects, tools, and certifications to generate structured career insights.
+Whether users are preparing for their first job, improving their CV, switching roles, or mapping a long-term career path, Career Helper provides a structured and intelligent way to make better career decisions.
 
 ---
 
-## ✨ Features
+## Key Features
 
 | Feature | Description |
 |---|---|
-| 🔐 **Register & Login** | Provides a secure authentication system so every user can access their own personal career dashboard. |
-| 📧 **Reset Password via Email** | Allows users to recover their account securely through a standard email-based password reset flow. |
-| 🧾 **Reset Password via Username + Code** | Offers an alternative fallback recovery method using a unique username and verification code. |
-| 🤖 **AI Career Analysis** | Uses Google Gemini AI to analyze user data and generate personalized career insights, skill evaluation, and role recommendations. |
-| 📄 **CV Upload** | Supports CV upload and prepares the document for AI-assisted parsing, review, and career analysis. |
-| 📊 **Result Page** | Displays AI-generated results inside a clean dashboard containing career breakdowns, scores, recommendations, and improvement areas. |
-| 🕘 **History Analysis** | Stores previous AI analyses so users can monitor progress and compare their career growth over time. |
-| 🖨️ **Download PDF Report** | Exports career analysis results into a professional, printable PDF report using DomPDF. |
-| 🗑️ **Trash & Restore** | Supports soft delete management, allowing users to restore deleted history or related data when needed. |
-| 👤 **Profile Settings** | Lets users manage profile information, username, bio, security settings, password updates, and account details. |
-| 🔔 **SweetAlert Feedback** | Provides beautiful, modern, interactive notifications for successful actions, validation responses, and user feedback. |
+| 🔐 **Register & Login** | Secure and streamlined authentication system that allows users to safely access their personal career workspace. |
+| 📧 **Reset Password via Email** | Standard secure password recovery workflow using tokenized email links for safe account restoration. |
+| 🔑 **Reset Password via Username + Code** | Alternative fallback recovery method using unique usernames and verification codes when email recovery is unavailable. |
+| 🤖 **AI Career Analysis** | Core feature powered by Google Gemini AI, delivering deep and tailored insights into the user’s career path, skills, and readiness. |
+| 📄 **CV Upload** | Fast document upload flow prepared for PDF and Word CV parsing, making user data easier to process and analyze. |
+| 📊 **Result Page** | Interactive dashboard displaying AI-generated breakdowns, career scores, competency gaps, recommendations, and next-step guidance. |
+| 📜 **History Analysis** | Chronological log that allows users to review previous analyses and track the evolution of their career profile over time. |
+| 🖨️ **Download PDF Report** | Production-ready PDF exporting system powered by DomPDF for clean, printable, and shareable AI career reports. |
+| 🗑️ **Trash & Restore** | Soft-delete mechanism that allows safe management and restoration of deleted analysis histories. |
+| ⚙️ **Profile Settings** | Complete control over user profile data, account security, avatar configuration, and personal information. |
+| 🔔 **SweetAlert Feedback** | Smooth, responsive, and visually polished modal notifications that create a premium interaction experience. |
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
-| Layer | Technology |
+| Category | Technology |
 |---|---|
-| **Backend** | Laravel, PHP |
-| **Frontend Reactive Engine** | Livewire, Alpine.js |
-| **Styling** | Tailwind CSS |
-| **Database** | MySQL |
-| **PDF Engine** | DomPDF |
-| **AI Engine** | Google Gemini AI Integration |
-| **Authentication** | Laravel Breeze / Laravel Auth System |
-| **Notification UI** | SweetAlert |
-| **Build Tool** | Vite |
+| **Backend Framework** | Laravel |
+| **Programming Language** | PHP |
+| **Frontend Reactive Layer** | Livewire & Alpine.js |
+| **UI & Styling** | Tailwind CSS |
+| **Database Engine** | MySQL |
+| **Document Rendering** | DomPDF |
+| **Intelligence Core** | Google Gemini AI Integration |
+| **Build Tooling** | Vite |
+| **Alert System** | SweetAlert |
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
-Follow these steps to install and run the project locally.
+Follow the steps below to run Career Helper locally.
 
 ```bash
 git clone https://github.com/username/career-helper.git
@@ -94,19 +79,32 @@ npm run dev
 php artisan serve
 ```
 
-After running the commands above, open the application in your browser:
+After starting the development server, open the application at:
 
 ```bash
 http://127.0.0.1:8000
 ```
 
+> On Windows, use `copy .env.example .env`.  
+> On macOS or Linux, use `cp .env.example .env`.
+
 ---
 
-## 🔑 Environment Configuration
+## Environment Configuration
 
-After copying `.env.example` into `.env`, configure your local environment.
+Before running the application, configure your `.env` file.
 
-### Database Configuration
+### Application
+
+```env
+APP_NAME="Career Helper"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+```
+
+### Database
 
 ```env
 DB_CONNECTION=mysql
@@ -117,7 +115,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Make sure the database already exists before running migration:
+Create the database before running migrations:
 
 ```sql
 CREATE DATABASE career_helper;
@@ -131,28 +129,112 @@ php artisan migrate
 
 ---
 
-## 🧠 Google Gemini AI Configuration
+## Google Gemini AI Setup
 
-To enable AI-powered career analysis, add your Gemini API key to the `.env` file.
+Career Helper uses Google Gemini AI as its intelligent analysis engine. Add your Gemini API credentials to the `.env` file:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-flash-latest
 ```
 
-> Keep your API key private. Never upload your `.env` file to GitHub.
-
-If the project uses a dedicated service class, the Gemini integration is commonly handled inside a service such as:
+A typical AI service layer may be placed in:
 
 ```bash
 app/Services/CareerAnalysisService.php
 ```
 
-This service is responsible for sending user career data to Gemini AI and returning structured analysis results to the application.
+This service can be responsible for:
+
+- Preparing career profile data.
+- Sending structured prompts to Gemini AI.
+- Receiving AI-generated analysis.
+- Normalizing the response into application-ready data.
+- Saving career analysis results into the database.
+
+> Never commit your `.env` file or private API keys to GitHub.
 
 ---
 
-## 🗂️ Project Structure
+## Application Flow
+
+```mermaid
+flowchart TD
+    A[User Registers or Logs In] --> B[Open Career Analysis Form]
+    B --> C[Input Skills, Experience, Education, Goals, and Preferences]
+    C --> D[Upload CV]
+    D --> E[Send Structured Data to Google Gemini AI]
+    E --> F[Generate AI Career Insights]
+    F --> G[Display Result Dashboard]
+    G --> H[Save Analysis History]
+    G --> I[Download PDF Report]
+```
+
+---
+
+## Career Analysis Input
+
+Career Helper can analyze multiple user profile dimensions, including:
+
+- Full name
+- Education background
+- Target role
+- Career interests
+- Work experience
+- Hard skills
+- Soft skills
+- Tools and technologies
+- Certifications
+- Projects
+- Work preferences
+- Preferred location
+- CV content or uploaded CV file
+
+These data points help Gemini AI produce a more accurate and contextual career recommendation.
+
+---
+
+## AI Result Output
+
+The AI-generated result can include:
+
+| Output | Description |
+|---|---|
+| **Profile Summary** | Short overview of the user’s current career profile. |
+| **Skill Analysis** | Evaluation of hard skills, soft skills, tools, and technical readiness. |
+| **CV Review** | Feedback on CV clarity, structure, relevance, and improvement areas. |
+| **Career Score** | Numerical or qualitative score representing career readiness. |
+| **Recommended Roles** | Suggested roles based on user strengths, interests, and experience. |
+| **Skill Gap Analysis** | Missing or weak skills that should be improved for the target role. |
+| **Improvement Roadmap** | Actionable learning steps to increase job readiness. |
+| **Final Recommendation** | Clear AI-generated advice for the user’s next career move. |
+
+---
+
+## PDF Report
+
+Career Helper supports PDF report generation using DomPDF.
+
+Install DomPDF if it is not already included:
+
+```bash
+composer require barryvdh/laravel-dompdf
+```
+
+Example PDF report sections:
+
+- User profile summary
+- Career readiness score
+- CV analysis
+- Skill analysis
+- Recommended roles
+- Competency gaps
+- Improvement roadmap
+- Final AI recommendation
+
+---
+
+## Suggested Folder Structure
 
 ```bash
 career-helper/
@@ -170,15 +252,16 @@ career-helper/
 ├── resources/
 │   ├── views/
 │   │   ├── auth/
+│   │   ├── career/
 │   │   ├── components/
-│   │   ├── layouts/
-│   │   └── career/
+│   │   └── layouts/
 │   ├── css/
 │   └── js/
 ├── routes/
 │   ├── web.php
 │   └── auth.php
 ├── storage/
+├── tests/
 ├── .env.example
 ├── composer.json
 ├── package.json
@@ -187,185 +270,32 @@ career-helper/
 
 ---
 
-## 🚀 Main Application Flow
+## Security Practices
 
-```mermaid
-flowchart TD
-    A[User Register / Login] --> B[Open Career Analysis Form]
-    B --> C[Input Skills, Experience, Education, Target Role, and Preferences]
-    C --> D[Upload CV]
-    D --> E[Send Data to Google Gemini AI]
-    E --> F[AI Generates Career Analysis]
-    F --> G[Show Result Dashboard]
-    G --> H[Save Analysis History]
-    G --> I[Download PDF Report]
-```
+Recommended security practices for this project:
 
----
+- Keep `.env` private and excluded from version control.
+- Validate CV uploads by file type and file size.
+- Sanitize and validate all user inputs.
+- Protect authenticated routes using middleware.
+- Store passwords using Laravel’s hashing system.
+- Avoid exposing raw AI responses directly without formatting or validation.
+- Use HTTPS in production.
+- Set `APP_DEBUG=false` in production.
+- Rotate API keys if they are accidentally exposed.
 
-## 🧪 Usage Guide
-
-### 1. Create an Account
-
-Register a new account or log in using an existing account.
-
-### 2. Fill Career Data
-
-Enter career-related information such as:
-
-- Education background
-- Target role
-- Career interest
-- Hard skills
-- Soft skills
-- Tools or technologies
-- Projects
-- Certifications
-- Work preference
-- Location
-
-### 3. Upload CV
-
-Upload your CV so the system can prepare it for AI-assisted career analysis.
-
-### 4. Run AI Analysis
-
-Submit the form and let Google Gemini AI process your data.
-
-### 5. Review Result
-
-The result page displays your career breakdown, strengths, weaknesses, score, recommendations, and suggested improvements.
-
-### 6. Export Report
-
-Download the analysis result as a clean PDF report.
-
----
-
-## 📄 PDF Report
-
-Career Helper uses **DomPDF** to generate printable PDF reports from AI analysis results.
-
-Install DomPDF if it is not already installed:
-
-```bash
-composer require barryvdh/laravel-dompdf
-```
-
-Example output includes:
-
-- User profile summary
-- Career readiness score
-- Skill analysis
-- CV analysis
-- Recommended roles
-- Improvement roadmap
-- Final AI recommendation
-
----
-
-## 🗑️ Soft Delete, Trash & Restore
-
-Career Helper supports soft delete behavior for selected data such as analysis history or uploaded files.
-
-Common commands used during development:
-
-```bash
-php artisan migrate
-```
-
-Example model setup:
-
-```php
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class AiAnalysis extends Model
-{
-    use SoftDeletes;
-}
-```
-
-This allows deleted records to be restored instead of being permanently removed.
-
----
-
-## 🔔 SweetAlert Notifications
-
-SweetAlert is used to provide clean and modern feedback for user actions.
-
-Examples of feedback messages:
-
-- `Password Berhasil di Update`
-- `Username Berhasil diganti`
-- `Name berhasil diganti`
-- `Data berhasil disimpan`
-- `Analisis berhasil dibuat`
-- `Data berhasil dipulihkan`
-- `Data berhasil dihapus`
-
----
-
-## 🛡️ Security Notes
-
-For production deployment, make sure to follow these rules:
+Production environment example:
 
 ```env
 APP_ENV=production
 APP_DEBUG=false
 ```
 
-Never commit sensitive files or credentials:
-
-```bash
-.env
-/storage/*.key
-```
-
-Recommended security practices:
-
-- Use strong password validation.
-- Keep Gemini API keys private.
-- Use HTTPS in production.
-- Validate uploaded CV files.
-- Restrict file types and file size.
-- Protect authenticated routes with middleware.
-- Avoid exposing raw AI responses directly to users.
-
 ---
 
-## 🌐 Deployment Notes
+## GitHub Push Notes
 
-Before deploying the project, run:
-
-```bash
-composer install --optimize-autoloader --no-dev
-npm run build
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan migrate --force
-```
-
-Make sure the following folders are writable:
-
-```bash
-storage/
-bootstrap/cache/
-```
-
-Create the storage symbolic link if your project stores uploaded files publicly:
-
-```bash
-php artisan storage:link
-```
-
----
-
-## 🧾 GitHub Upload Notes
-
-Before pushing the project to GitHub, make sure `.env` is ignored.
-
-Example `.gitignore` essentials:
+Make sure these files and folders are ignored:
 
 ```gitignore
 /vendor
@@ -377,82 +307,106 @@ Example `.gitignore` essentials:
 .phpunit.result.cache
 ```
 
-Then push the project:
+Push the project:
 
 ```bash
-git init
 git add .
 git commit -m "Initial commit: Career Helper AI platform"
-git branch -M main
-git remote add origin https://github.com/username/career-helper.git
-git push -u origin main
+git push origin main
 ```
 
 ---
 
-## 🧭 Roadmap
+## Deployment Checklist
+
+Before deploying the application, run:
+
+```bash
+composer install --optimize-autoloader --no-dev
+npm run build
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan migrate --force
+```
+
+Make sure these directories are writable:
+
+```bash
+storage/
+bootstrap/cache/
+```
+
+If the application stores uploaded CV files publicly, create the storage symbolic link:
+
+```bash
+php artisan storage:link
+```
+
+---
+
+## Roadmap
 
 Planned improvements:
 
 - [ ] Advanced CV text extraction
+- [ ] Word document parsing support
 - [ ] Multi-language AI analysis
-- [ ] Role-based career roadmap
-- [ ] Job vacancy recommendation
-- [ ] Skill gap visualization chart
+- [ ] AI-powered job matching
+- [ ] Skill gap visualization charts
+- [ ] Personalized learning roadmap
+- [ ] Interview preparation assistant
+- [ ] LinkedIn profile review
 - [ ] Admin dashboard
-- [ ] More detailed PDF report template
-- [ ] AI-powered interview preparation
-- [ ] AI-based LinkedIn profile review
+- [ ] More advanced PDF templates
+- [ ] Export history as CSV or PDF bundle
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome.
 
 To contribute:
 
 1. Fork the repository.
-2. Create a new branch.
+2. Create a new feature branch.
 3. Make your changes.
-4. Commit your changes.
-5. Push to your branch.
+4. Commit your work.
+5. Push your branch.
 6. Open a pull request.
 
 ```bash
 git checkout -b feature/your-feature-name
+git add .
 git commit -m "Add your feature"
 git push origin feature/your-feature-name
 ```
 
 ---
 
-## 📜 License
+## License
 
 This project is open-source and available under the **MIT License**.
 
 ---
 
-## 🙌 Acknowledgements
+## Acknowledgements
 
-This project was built using:
+Career Helper is built with the help of:
 
-- [Laravel](https://laravel.com/)
-- [Livewire](https://livewire.laravel.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Alpine.js](https://alpinejs.dev/)
-- [Google Gemini AI](https://ai.google.dev/)
-- [DomPDF](https://github.com/barryvdh/laravel-dompdf)
-- [SweetAlert](https://sweetalert2.github.io/)
+- Laravel
+- Livewire
+- Alpine.js
+- Tailwind CSS
+- MySQL
+- DomPDF
+- SweetAlert
+- Google Gemini AI
 
 ---
 
-<div align="center">
-
-### Career Helper
-
-**Analyze your skills. Improve your CV. Build your career path with AI.**
-
-Made with Laravel, Tailwind CSS, Livewire, and Google Gemini AI.
-
-</div>
+<p align="center">
+  <strong>Career Helper</strong><br>
+  Analyze your skills. Improve your CV. Build your career path with AI.
+</p>
