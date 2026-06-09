@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="220" alt="Laravel Logo">
-  <span style="font-size: 30px; margin: 0 20px; position: relative; top: -15px;"></span>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" width="200" alt="Google Gemini Logo">
+  <img src="./public/readme/laravel-logo.png" height="75" alt="Laravel Logo">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./public/readme/gemini-logo.png" height="75" alt="Google Gemini Logo">
 </p>
 
 <h1 align="center">Career Helper — AI-Driven Career Optimization Platform</h1>
