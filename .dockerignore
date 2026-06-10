@@ -12,3 +12,4 @@ tests
 README.md
 public/storage
 bootstrap/cache/*.php
+public/build/hot
