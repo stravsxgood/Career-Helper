@@ -31,14 +31,11 @@ COPY --from=vendor /app/vendor ./vendor
 RUN npm run build
 
 
-FROM php:8.4-fpm-bookworm
+FROM php:8.4-cli-bookworm
 
 WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
-    nginx \
-    supervisor \
-    gettext-base \
     git \
     unzip \
     zip \
@@ -62,24 +59,21 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 COPY . .
 
 COPY --from=vendor /app/vendor ./vendor
 COPY --from=assets /app/public/build ./public/build
 
-COPY docker/nginx.conf.template /etc/nginx/templates/nginx.conf.template
-COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY docker/start.sh /usr/local/bin/start
-
-RUN chmod +x /usr/local/bin/start \
-    && mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R ug+rwx storage bootstrap/cache
+RUN mkdir -p \
+        storage/logs \
+        storage/framework/cache \
+        storage/framework/sessions \
+        storage/framework/views \
+        bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 ENV PORT=8080
 
 EXPOSE 8080
 
-CMD ["/usr/local/bin/start"]
+CMD ["sh", "-c", "rm -f bootstrap/cache/*.php && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"]
