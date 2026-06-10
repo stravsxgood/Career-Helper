@@ -16,6 +16,16 @@
         class="min-h-screen bg-slate-50 px-4 py-8 text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-100 sm:px-6 lg:px-8"
         style="color-scheme: light;">
         <section class="mx-auto max-w-6xl">
+
+            <a href="{{ route('dashboard') }}"
+                class="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-600 shadow-sm transition-all duration-300 hover:-translate-x-0.5 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                Back
+            </a>
+
             <header
                 class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-slate-900/80">
                 <div class="relative p-6 sm:p-8">
@@ -28,11 +38,6 @@
 
                     <div class="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                         <div class="flex items-start gap-4">
-                            <div
-                                class="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.35rem] bg-slate-950 text-xl font-black text-white shadow-lg dark:bg-white dark:text-slate-950">
-                                {{ strtoupper(substr($user?->name ?? 'U', 0, 1)) }}
-                            </div>
-
                             <div>
                                 <p
                                     class="inline-flex items-center gap-2 rounded-full bg-[#34A853]/10 px-3 py-1 text-xs font-bold text-[#188038] dark:text-green-300">

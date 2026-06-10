@@ -155,8 +155,6 @@
 
                 <button type="button" @click="profileOpen = ! profileOpen" :aria-expanded="profileOpen.toString()"
                     class="flex w-full items-center gap-3 rounded-[1.45rem] border border-white/10 bg-white/[0.055] p-3 text-left transition duration-300 hover:bg-white/[0.085] focus:outline-none focus:ring-2 focus:ring-blue-400/40">
-                    <span
-                        class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-white to-slate-200 text-sm font-bold text-slate-950">{{ $initials }}</span>
                     <span class="min-w-0 flex-1">
                         <span class="block truncate text-sm font-semibold text-white">{{ $displayName }}</span>
                         <span class="block truncate text-xs text-slate-400">{{ $email }}</span>
