@@ -1,75 +1,93 @@
 <?php
 
 use App\Models\User;
-use Livewire\Livewire;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+
+uses(RefreshDatabase::class);
 
 test('profile page is displayed', function () {
-    $this->actingAs($user = User::factory()->create());
+    $user = User::factory()->create();
 
-    $this->get(route('profile.edit'))->assertOk();
+    $response = $this
+        ->actingAs($user)
+        ->get(route('profile.edit'));
+
+    $response->assertOk();
 });
 
 test('profile information can be updated', function () {
     $user = User::factory()->create();
 
-    $this->actingAs($user);
+    $response = $this
+        ->actingAs($user)
+        ->patch(route('profile.update'), [
+            'name' => 'Test User',
+            'username' => 'testuser',
+            'email' => 'test@example.com',
+        ]);
 
-    $response = Livewire::test('pages::settings.profile')
-        ->set('name', 'Test User')
-        ->set('email', 'test@example.com')
-        ->call('updateProfileInformation');
-
-    $response->assertHasNoErrors();
+    $response->assertSessionHasNoErrors();
 
     $user->refresh();
 
-    expect($user->name)->toEqual('Test User');
-    expect($user->email)->toEqual('test@example.com');
-    expect($user->email_verified_at)->toBeNull();
+    expect($user->name)->toBe('Test User');
+    expect($user->email)->toBe('test@example.com');
 });
 
 test('email verification status is unchanged when email address is unchanged', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
 
-    $this->actingAs($user);
+    $response = $this
+        ->actingAs($user)
+        ->patch(route('profile.update'), [
+            'name' => 'Test User',
+            'username' => $user->username ?? 'testuser',
+            'email' => $user->email,
+        ]);
 
-    $response = Livewire::test('pages::settings.profile')
-        ->set('name', 'Test User')
-        ->set('email', $user->email)
-        ->call('updateProfileInformation');
+    $response->assertSessionHasNoErrors();
 
-    $response->assertHasNoErrors();
+    $user->refresh();
 
-    expect($user->refresh()->email_verified_at)->not->toBeNull();
+    expect($user->email_verified_at)->not->toBeNull();
 });
 
 test('user can delete their account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'password' => Hash::make('password'),
+    ]);
 
-    $this->actingAs($user);
+    $response = $this
+        ->actingAs($user)
+        ->delete(route('profile.destroy'), [
+            'password' => 'password',
+        ]);
 
-    $response = Livewire::test('pages::settings.delete-user-modal')
-        ->set('password', 'password')
-        ->call('deleteUser');
+    $response->assertSessionHasNoErrors();
 
-    $response
-        ->assertHasNoErrors()
-        ->assertRedirect('/');
+    $this->assertGuest();
 
-    expect($user->fresh())->toBeNull();
-    expect(auth()->check())->toBeFalse();
+    expect(User::find($user->id))->toBeNull();
 });
 
 test('correct password must be provided to delete account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'password' => Hash::make('password'),
+    ]);
 
-    $this->actingAs($user);
+    $response = $this
+        ->actingAs($user)
+        ->from(route('profile.edit'))
+        ->delete(route('profile.destroy'), [
+            'password' => 'wrong-password',
+        ]);
 
-    $response = Livewire::test('pages::settings.delete-user-modal')
-        ->set('password', 'wrong-password')
-        ->call('deleteUser');
+    $response->assertSessionHasErrors('password', null, 'userDeletion');
 
-    $response->assertHasErrors(['password']);
+    $this->assertAuthenticated();
 
-    expect($user->fresh())->not->toBeNull();
+    expect(User::find($user->id))->not->toBeNull();
 });

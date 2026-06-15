@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Features;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -16,22 +20,25 @@ class AuthenticatedSessionController extends Controller
         return view('pages.auth.login');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-        ]);
+        $user = User::where('email', $request->email)->first();
 
-        if (! Auth::attempt($credentials, $request->boolean('remember'))) {
-            throw ValidationException::withMessages([
-                'email' => 'Email atau password salah.',
-            ]);
+        if (
+            $user &&
+            Hash::check($request->password, $user->password) &&
+            $user->two_factor_secret
+        ) {
+
+            $request->session()->put('login.id', $user->id);
+            return redirect()->route('two-factor.login');
         }
 
+        // 3. Jika tidak pakai 2FA, jalankan login normal seperti biasa
+        $request->authenticate();
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('dashboard'));
     }
 
     public function destroy(Request $request): RedirectResponse

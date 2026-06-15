@@ -263,3 +263,9 @@
         </section>
     </div>
 </div>
+
+@if (isset($slot))
+    <div class="min-h-screen pb-24 lg:pb-0 lg:pl-72">
+        {{ $slot }}
+    </div>
+@endif

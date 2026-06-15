@@ -49,7 +49,8 @@ test('password can be reset with valid token', function () {
     $this->post(route('password.request'), ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-        $response = $this->post(route('password.update'), [
+        // PERBAIKAN: Ubah password.update menjadi password.store
+        $response = $this->post(route('password.store'), [
             'token' => $notification->token,
             'email' => $user->email,
             'password' => 'password',
