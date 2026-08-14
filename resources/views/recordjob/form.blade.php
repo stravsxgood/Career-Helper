@@ -1,6 +1,7 @@
 @php
     $isEdit = isset($job);
     $statuses = ['Applied', 'Interview', 'Testing', 'Accepted', 'Rejected'];
+    $idSuffix = $isEdit ? '_' . $job->id : '';
 @endphp
 
 <form method="POST" action="{{ $isEdit ? route('recordjob.update', $job->id) : route('recordjob.store') }}" class="mt-6 space-y-5">
@@ -13,10 +14,10 @@
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <!-- Company Name -->
         <div class="relative">
-            <input id="company_name" name="company_name" type="text"
+            <input id="company_name{{ $idSuffix }}" name="company_name" type="text"
                 value="{{ old('company_name', $job->company_name ?? '') }}" placeholder=" "
                 class="peer w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-            <label for="company_name"
+            <label for="company_name{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Company Name
             </label>
@@ -27,10 +28,10 @@
 
         <!-- Position -->
         <div class="relative">
-            <input id="position" name="position" type="text" value="{{ old('position', $job->position ?? '') }}"
+            <input id="position{{ $idSuffix }}" name="position" type="text" value="{{ old('position', $job->position ?? '') }}"
                 placeholder=" "
                 class="peer w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-            <label for="position"
+            <label for="position{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Position
             </label>
@@ -41,10 +42,10 @@
 
         <!-- Platform -->
         <div class="relative">
-            <input id="platform" name="platform" type="text" value="{{ old('platform', $job->platform ?? '') }}"
+            <input id="platform{{ $idSuffix }}" name="platform" type="text" value="{{ old('platform', $job->platform ?? '') }}"
                 placeholder=" "
                 class="peer w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-            <label for="platform"
+            <label for="platform{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Platform
             </label>
@@ -55,16 +56,16 @@
 
         <!-- Status -->
         <div class="relative">
-            <select id="status" name="status"
+            <select id="status{{ $idSuffix }}" name="status"
                 class="peer w-full appearance-none rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-                <option value="" disabled selected>Choose status</option>
+                <option value="" disabled {{ old('status', $job->status ?? '') ? '' : 'selected' }}>Choose status</option>
                 @foreach ($statuses as $status)
                     <option value="{{ $status }}"
                         {{ old('status', $job->status ?? '') == $status ? 'selected' : '' }}>{{ $status }}
                     </option>
                 @endforeach
             </select>
-            <label for="status"
+            <label for="status{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Status
             </label>
@@ -75,11 +76,11 @@
 
         <!-- Applied At -->
         <div class="relative">
-            <input id="applied_at" name="applied_at" type="date"
-                value="{{ old('applied_at', isset($job) ? $job->applied_at->format('Y-m-d') : '') }}"
+            <input id="applied_at{{ $idSuffix }}" name="applied_at" type="date"
+                value="{{ old('applied_at', isset($job) && $job->applied_at ? $job->applied_at->format('Y-m-d') : '') }}"
                 placeholder=" "
                 class="peer w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-            <label for="applied_at"
+            <label for="applied_at{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Date Applied
             </label>
@@ -90,10 +91,10 @@
 
         <!-- Salary -->
         <div class="relative">
-            <input id="salary" name="salary" type="text" value="{{ old('salary', $job->salary ?? '') }}"
+            <input id="salary{{ $idSuffix }}" name="salary" type="text" value="{{ old('salary', $job->salary ?? '') }}"
                 placeholder=" "
                 class="peer w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-            <label for="salary"
+            <label for="salary{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Salary (Rp)
             </label>
@@ -104,10 +105,10 @@
 
         <!-- Job URL -->
         <div class="sm:col-span-2 relative">
-            <input id="job_url" name="job_url" type="url" value="{{ old('job_url', $job->job_url ?? '') }}"
+            <input id="job_url{{ $idSuffix }}" name="job_url" type="url" value="{{ old('job_url', $job->job_url ?? '') }}"
                 placeholder=" "
                 class="peer w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">
-            <label for="job_url"
+            <label for="job_url{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Job URL
             </label>
@@ -118,9 +119,9 @@
 
         <!-- Notes -->
         <div class="sm:col-span-2 relative">
-            <textarea id="notes" name="notes" rows="4" placeholder=" "
+            <textarea id="notes{{ $idSuffix }}" name="notes" rows="4" placeholder=" "
                 class="peer w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm font-semibold text-slate-900 outline-none transition-all duration-300 placeholder-transparent focus:border-[#4285F4] focus:bg-white focus:ring-4 focus:ring-[#4285F4]/10 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:bg-slate-900">{{ old('notes', $job->notes ?? '') }}</textarea>
-            <label for="notes"
+            <label for="notes{{ $idSuffix }}"
                 class="pointer-events-none absolute left-4 top-2 text-xs font-bold text-slate-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#4285F4]">
                 Notes
             </label>
@@ -134,7 +135,7 @@
     <div class="flex items-center justify-end gap-3 pt-2">
         @if ($isEdit)
             <!-- Jika dalam modal Edit: Tutup Modal -->
-            <button type="button" @click="openEditModal = false"
+            <button type="button" @click="if (typeof editModalId !== 'undefined') editModalId = null; if (typeof openEditModal !== 'undefined') openEditModal = false;"
                 class="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-2.5 text-sm font-semibold text-slate-600 transition-all duration-300 hover:bg-slate-100 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-800/50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400/50">
                 Cancel
             </button>

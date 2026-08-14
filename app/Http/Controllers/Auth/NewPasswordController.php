@@ -15,6 +15,9 @@ use Illuminate\View\View;
 
 class NewPasswordController extends Controller
 {
+    /**
+     * Menampilkan halaman form input password baru (via link token email).
+     */
     public function create(Request $request): View
     {
         return view('pages.auth.reset-password', [
@@ -22,6 +25,9 @@ class NewPasswordController extends Controller
         ]);
     }
 
+    /**
+     * Memproses update password baru pengguna.
+     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -45,6 +51,6 @@ class NewPasswordController extends Controller
         return $status === Password::PasswordReset
             ? redirect()->route('login')->with('status', __($status))
             : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+                ->withErrors(['email' => __($status)]);
     }
 }

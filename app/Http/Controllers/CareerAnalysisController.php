@@ -2,31 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\CareerAnalysisService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use RuntimeException;
 
 class CareerAnalysisController extends Controller
 {
-    public function analyze(Request $request, CareerAnalysisService $careerAnalysisService)
+    /**
+     * Menjalankan analisis karir berbasis AI berdasarkan skill dan pengalaman.
+     */
+    public function analyze(Request $request, CareerAnalysisService $careerAnalysisService): JsonResponse
     {
         $validated = $request->validate([
             'hard_skills' => ['required', 'string'],
             'soft_skills' => ['required', 'string'],
-            'experience'  => ['nullable', 'string'],
+            'experience' => ['nullable', 'string'],
         ]);
 
         try {
             $result = $careerAnalysisService->analyze($validated);
 
             return response()->json([
+                'success' => true,
                 'message' => 'Career analysis berhasil dibuat.',
-                'data'    => $result->output_json, // ✅ Langsung akses property model
+                'data' => $result->output_json,
             ]);
-
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             return response()->json([
+                'success' => false,
                 'message' => 'Analisis gagal, silakan coba lagi.',
-                'error'   => $e->getMessage(),
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

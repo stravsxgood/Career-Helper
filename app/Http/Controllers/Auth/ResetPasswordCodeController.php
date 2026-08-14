@@ -6,38 +6,50 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\ResetPasswordCodeNotification;
 use App\Support\ResetPasswordCode;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class ResetPasswordCodeController extends Controller
 {
+    /**
+     * Konfigurasi batas waktu dan percobaan kode OTP.
+     */
     private const CODE_EXPIRES_MINUTES = 60;
+
     private const RESEND_COOLDOWN_SECONDS = 300;
+
     private const MAX_CODE_ATTEMPTS = 5;
 
-    public function showUsernameForm()
+    private const VERIFIED_SESSION_LIFETIME_SECONDS = 600;
+
+    /**
+     * Menampilkan form input username untuk meminta kode reset.
+     */
+    public function showUsernameForm(): View
     {
         return view('pages.auth.username-request');
     }
 
-    public function sendCode(Request $request)
+    /**
+     * Mengirimkan kode verifikasi reset password ke email pengguna.
+     */
+    public function sendCode(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'username' => ['required', 'string', 'max:255'],
         ]);
 
         $username = $validated['username'];
-
-        session([
-            'reset_password_username' => $username,
-        ]);
+        session(['reset_password_username' => $username]);
 
         $user = User::where('username', $username)->first();
 
+        // Tetap kirim respon sukses walau user tidak ditemukan guna mencegah user enumeration
         if ($user) {
             $this->generateAndSendCode($user);
         }
@@ -47,7 +59,10 @@ class ResetPasswordCodeController extends Controller
             ->with('status', 'Jika username valid, kode reset password telah dikirim ke email yang terdaftar.');
     }
 
-    public function showCodeForm()
+    /**
+     * Menampilkan form input kode verifikasi OTP.
+     */
+    public function showCodeForm(): View|RedirectResponse
     {
         if (! session('reset_password_username')) {
             return redirect()->route('password.code.request');
@@ -56,7 +71,10 @@ class ResetPasswordCodeController extends Controller
         return view('pages.auth.verify-code');
     }
 
-    public function verifyCode(Request $request)
+    /**
+     * Memvalidasi kode reset password yang dimasukkan pengguna.
+     */
+    public function verifyCode(Request $request): RedirectResponse
     {
         $request->validate([
             'code' => ['required', 'string', 'max:20'],
@@ -70,18 +88,13 @@ class ResetPasswordCodeController extends Controller
 
         $user = User::where('username', $username)->first();
 
-        if (! $user) {
-            throw ValidationException::withMessages([
-                'code' => 'Kode reset password tidak valid.',
-            ]);
-        }
-
-        if (! $user->reset_password_code_hash || ! $user->reset_password_code_expires_at) {
+        if (! $user || ! $user->reset_password_code_hash || ! $user->reset_password_code_expires_at) {
             throw ValidationException::withMessages([
                 'code' => 'Kode reset password tidak valid atau sudah tidak tersedia.',
             ]);
         }
 
+        // Cek apakah kode sudah expired
         if (now()->greaterThan($user->reset_password_code_expires_at)) {
             $this->clearResetCode($user);
 
@@ -90,6 +103,7 @@ class ResetPasswordCodeController extends Controller
             ]);
         }
 
+        // Cek limit percobaan input kode
         if ($user->reset_password_code_attempts >= self::MAX_CODE_ATTEMPTS) {
             $this->clearResetCode($user);
 
@@ -116,7 +130,10 @@ class ResetPasswordCodeController extends Controller
         return redirect()->route('password.code.reset');
     }
 
-    public function resendCode()
+    /**
+     * Mengirim ulang kode verifikasi ke email dengan proteksi cooldown.
+     */
+    public function resendCode(): RedirectResponse
     {
         $username = session('reset_password_username');
 
@@ -134,17 +151,21 @@ class ResetPasswordCodeController extends Controller
         return back()->with('status', 'Jika username valid, kode baru telah dikirim ke email yang terdaftar.');
     }
 
-    public function showResetForm()
+    /**
+     * Menampilkan form pembuatan password baru setelah kode terverifikasi.
+     */
+    public function showResetForm(): View
     {
         $this->ensureCodeHasBeenVerified();
 
         return view('pages.auth.reset-code');
     }
 
-    public function resetPassword(Request $request)
+    /**
+     * Memperbarui password user dan membersihkan session reset.
+     */
+    public function resetPassword(Request $request): RedirectResponse
     {
-        Log::info('RESET CODE: resetPassword terpanggil');
-
         $this->ensureCodeHasBeenVerified();
 
         $validated = $request->validate([
@@ -152,7 +173,6 @@ class ResetPasswordCodeController extends Controller
         ]);
 
         $username = session('reset_password_username');
-
         $user = User::where('username', $username)->first();
 
         if (! $user) {
@@ -163,14 +183,10 @@ class ResetPasswordCodeController extends Controller
                 ]);
         }
 
-        $oldPasswordHash = $user->password;
-
         $user->forceFill([
             'password' => Hash::make($validated['password']),
             'remember_token' => Str::random(60),
         ])->save();
-
-        $user->refresh();
 
         $this->clearResetCode($user);
 
@@ -185,6 +201,9 @@ class ResetPasswordCodeController extends Controller
             ->with('status', 'Password berhasil direset. Silakan login dengan password baru.');
     }
 
+    /**
+     * Membuat kode reset baru dan mengirimkannya melalui notification.
+     */
     private function generateAndSendCode(User $user): void
     {
         $code = ResetPasswordCode::generate();
@@ -199,6 +218,9 @@ class ResetPasswordCodeController extends Controller
         $user->notify(new ResetPasswordCodeNotification($code));
     }
 
+    /**
+     * Memastikan jeda cooldown pengiriman ulang kode telah terpenuhi.
+     */
     private function ensureCanResendCode(User $user): void
     {
         if (! $user->reset_password_code_sent_at) {
@@ -211,11 +233,14 @@ class ResetPasswordCodeController extends Controller
             $remaining = self::RESEND_COOLDOWN_SECONDS - $secondsSinceLastSent;
 
             throw ValidationException::withMessages([
-                'resend' => 'Tunggu ' . $remaining . ' detik sebelum meminta kode baru.',
+                'resend' => "Tunggu {$remaining} detik sebelum meminta kode baru.",
             ]);
         }
     }
 
+    /**
+     * Memastikan kode telah diverifikasi dan masa berlaku sesi belum habis.
+     */
     private function ensureCodeHasBeenVerified(): void
     {
         $verified = session('reset_password_code_verified');
@@ -225,7 +250,7 @@ class ResetPasswordCodeController extends Controller
             abort(403);
         }
 
-        if (now()->timestamp - $verifiedAt > 600) {
+        if (now()->timestamp - $verifiedAt > self::VERIFIED_SESSION_LIFETIME_SECONDS) {
             session()->forget([
                 'reset_password_code_verified',
                 'reset_password_code_verified_at',
@@ -235,6 +260,9 @@ class ResetPasswordCodeController extends Controller
         }
     }
 
+    /**
+     * Menghapus seluruh data kode reset dari database.
+     */
     private function clearResetCode(User $user): void
     {
         $user->forceFill([

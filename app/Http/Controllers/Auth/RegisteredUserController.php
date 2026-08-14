@@ -15,7 +15,7 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Tampilkan halaman register.
+     * Menampilkan halaman registrasi akun.
      */
     public function create(): View
     {
@@ -23,30 +23,14 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Proses register user baru.
+     * Memproses pendaftaran akun pengguna baru.
      */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-
-            'username' => [
-                'required',
-                'string',
-                'max:255',
-                'alpha_dash',
-                'unique:users,username',
-            ],
-
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                'unique:' . User::class,
-            ],
-
+            'username' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:users,username'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'username.required' => 'Username wajib diisi.',

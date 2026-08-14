@@ -25,7 +25,7 @@ return new class extends Migration
 
             // Status Lamaran (Default: Applied)
             $table->enum('status', ['Applied', 'Interview', 'Testing', 'Accepted', 'Rejected'])
-                  ->default('Applied');
+                ->default('Applied');
 
             // Gaji/Salary (Menggunakan unsignedBigInteger untuk menampung nominal angka tanpa desimal)
             $table->unsignedBigInteger('salary')->nullable();

@@ -23,7 +23,7 @@ class RecordJobTest extends TestCase
     public function test_user_dapat_melihat_halaman_index_record_job()
     {
         $response = $this->actingAs($this->user)
-                         ->get(route('recordjob.index'));
+            ->get(route('recordjob.index'));
 
         $response->assertStatus(200);
         $response->assertViewIs('recordjob.index');
@@ -33,24 +33,24 @@ class RecordJobTest extends TestCase
     {
         $data = [
             'company_name' => 'PT Teknologi Perkasa',
-            'position'     => 'Backend Developer',
-            'platform'     => 'LinkedIn',
-            'status'       => 'Applied',
-            'applied_at'   => '2026-08-10',
-            'salary'       => 'Rp 8.000.000',
-            'job_url'      => 'https://linkedin.com/jobs/123',
-            'notes'        => 'Lamaran dikirim via web',
+            'position' => 'Backend Developer',
+            'platform' => 'LinkedIn',
+            'status' => 'Applied',
+            'applied_at' => '2026-08-10',
+            'salary' => 'Rp 8.000.000',
+            'job_url' => 'https://linkedin.com/jobs/123',
+            'notes' => 'Lamaran dikirim via web',
         ];
 
         $response = $this->actingAs($this->user)
-                         ->post(route('recordjob.store'), $data);
+            ->post(route('recordjob.store'), $data);
 
         $response->assertRedirect(route('recordjob.index'));
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('record_jobs', [
             'company_name' => 'PT Teknologi Perkasa',
-            'salary'       => 8000000,
+            'salary' => 8000000,
         ]);
     }
 
@@ -58,36 +58,36 @@ class RecordJobTest extends TestCase
     {
         $job = RecordJob::create([
             'company_name' => 'PT Lama Mandiri',
-            'position'     => 'Junior Dev',
-            'platform'     => 'JobStreet',
-            'status'       => 'Applied',
-            'applied_at'   => '2026-08-01',
-            'salary'       => 5000000,
+            'position' => 'Junior Dev',
+            'platform' => 'JobStreet',
+            'status' => 'Applied',
+            'applied_at' => '2026-08-01',
+            'salary' => 5000000,
         ]);
 
         $updatedData = [
             'company_name' => 'PT Lama Mandiri (Updated)',
-            'position'     => 'Senior Dev',
-            'platform'     => 'JobStreet',
-            'status'       => 'Interview',
-            'applied_at'   => '2026-08-05',
-            'salary'       => 'Rp 10.000.000',
-            'job_url'      => 'jobstreet.co.id/job/99',
-            'notes'        => 'Lolos tahap interview 1',
+            'position' => 'Senior Dev',
+            'platform' => 'JobStreet',
+            'status' => 'Interview',
+            'applied_at' => '2026-08-05',
+            'salary' => 'Rp 10.000.000',
+            'job_url' => 'jobstreet.co.id/job/99',
+            'notes' => 'Lolos tahap interview 1',
         ];
 
         $response = $this->actingAs($this->user)
-                         ->put(route('recordjob.update', $job->id), $updatedData);
+            ->put(route('recordjob.update', $job->id), $updatedData);
 
         $response->assertRedirect(route('recordjob.index'));
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('record_jobs', [
-            'id'           => $job->id,
+            'id' => $job->id,
             'company_name' => 'PT Lama Mandiri (Updated)',
-            'status'       => 'Interview',
-            'salary'       => 10000000,
-            'job_url'      => 'https://jobstreet.co.id/job/99',
+            'status' => 'Interview',
+            'salary' => 10000000,
+            'job_url' => 'https://jobstreet.co.id/job/99',
         ]);
     }
 
@@ -95,14 +95,14 @@ class RecordJobTest extends TestCase
     {
         $job = RecordJob::create([
             'company_name' => 'PT Hapus Sejahtera',
-            'position'     => 'QA Engineer',
-            'platform'     => 'KitaLulus',
-            'status'       => 'Rejected',
-            'applied_at'   => '2026-08-01',
+            'position' => 'QA Engineer',
+            'platform' => 'KitaLulus',
+            'status' => 'Rejected',
+            'applied_at' => '2026-08-01',
         ]);
 
         $response = $this->actingAs($this->user)
-                         ->delete(route('recordjob.destroy', $job->id));
+            ->delete(route('recordjob.destroy', $job->id));
 
         $response->assertRedirect(route('recordjob.index'));
         $response->assertSessionHas('success');

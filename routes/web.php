@@ -1,12 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Models\AiAnalyses;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecordJobController;
+use App\Models\AiAnalyses;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 
@@ -20,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::view('analysis', 'analysis')->name('analysis');
 
     Route::livewire('/career/analyze', 'analyze')
@@ -115,7 +117,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 : [];
         }
 
-        if ($result instanceof \Illuminate\Support\Collection) {
+        if ($result instanceof Collection) {
             $result = $result->toArray();
         }
 
@@ -124,10 +126,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'result' => $result,
         ])->setPaper('a4', 'portrait');
 
-        return $pdf->download('career-analysis-report-' . $analysis->getKey() . '.pdf');
+        return $pdf->download('career-analysis-report-'.$analysis->getKey().'.pdf');
     })->name('result.pdf');
 
-    Route::resource('recordjob', RecordJobController::class);
+    Route::resource('recordjob', RecordJobController::class)->parameters([
+        'recordjob' => 'recordJob',
+    ]);
 
 });
 
@@ -153,6 +157,6 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

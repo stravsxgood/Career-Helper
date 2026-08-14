@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AiAnalyses extends Model
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'ai_analyses';
 
@@ -22,9 +23,14 @@ class AiAnalyses extends Model
         'error_message',
     ];
 
-    protected $casts = [
-        'input_json' => 'array',
-        'output_json' => 'array',
-        'deleted_at' => 'datetime',
-    ];
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'input_json' => 'array',
+            'output_json' => 'array',
+        ];
+    }
 }

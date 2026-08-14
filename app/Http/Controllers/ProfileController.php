@@ -11,13 +11,9 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Show Profile Edit Page
-    |--------------------------------------------------------------------------
-    | Menampilkan halaman settings profile.
-    |--------------------------------------------------------------------------
-    */
+    /**
+     * Menampilkan halaman pengaturan profil user.
+     */
     public function edit(Request $request): View
     {
         return view('pages.settings.profile', [
@@ -25,68 +21,45 @@ class ProfileController extends Controller
         ]);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Update Profile Information
-    |--------------------------------------------------------------------------
-    | Update data profile seperti name, username, dan email.
-    |--------------------------------------------------------------------------
-    */
+    /**
+     * Memperbarui informasi profil user.
+     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
-
-        $user->fill($request->validated());
-
         $validated = $request->validated();
 
+        // Cek perubahan data sebelum disimpan
         $nameChanged = isset($validated['name']) && $user->name !== $validated['name'];
-        $usernameChanged = array_key_exists('username', $validated) && $user->username !== $validated['username'];
+        $usernameChanged = isset($validated['username']) && $user->username !== $validated['username'];
         $emailChanged = isset($validated['email']) && $user->email !== $validated['email'];
 
         $user->fill($validated);
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Reset Email Verification
-        |--------------------------------------------------------------------------
-        | Kalau email berubah, status verified dikosongkan ulang.
-        |--------------------------------------------------------------------------
-        */
+        // Reset verifikasi email jika email diubah
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
 
         $user->save();
 
-        $message = 'Profile berhasil diupdate.';
-
-        if ($usernameChanged && $nameChanged) {
-            $message = 'Username dan Name berhasil diganti.';
-        } elseif ($usernameChanged) {
-            $message = 'Username berhasil diganti.';
-        } elseif ($nameChanged) {
-            $message = 'Name berhasil diganti.';
-        } elseif ($emailChanged) {
-            $message = 'Email berhasil diganti.';
-        }
+        // Tentukan pesan toast berdasarkan field yang berubah
+        $message = match (true) {
+            $usernameChanged && $nameChanged => 'Username dan Name berhasil diperbarui.',
+            $usernameChanged => 'Username berhasil diperbarui.',
+            $nameChanged => 'Name berhasil diperbarui.',
+            $emailChanged => 'Email berhasil diperbarui.',
+            default => 'Profile berhasil diperbarui.',
+        };
 
         return Redirect::route('profile.edit')
             ->with('status', 'profile-updated')
             ->with('toast_message', $message);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Delete User Account
-    |--------------------------------------------------------------------------
-    | Menghapus akun user setelah password divalidasi.
-    |--------------------------------------------------------------------------
-    */
+    /**
+     * Menghapus akun user secara permanen.
+     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

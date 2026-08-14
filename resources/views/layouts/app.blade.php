@@ -40,6 +40,8 @@
         </flux:main>
     </x-layouts::app.sidebar>
 
+    @stack('scripts')
+
     @livewireScripts
 </body>
 </html>
