@@ -6,6 +6,7 @@ use App\Models\AiAnalyses;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\RecordJobController;
 
 Route::view('/', 'welcome')->name('home');
 
@@ -125,6 +126,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         return $pdf->download('career-analysis-report-' . $analysis->getKey() . '.pdf');
     })->name('result.pdf');
+
+    Route::resource('recordjob', RecordJobController::class);
+
 });
 
 /*

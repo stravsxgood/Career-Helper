@@ -1,4 +1,3 @@
-<laravel-boost-guidelines>
 === foundation rules ===
 
 # Laravel Boost Guidelines
@@ -172,4 +171,80 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - Run tests: `php artisan test --compact` or filter: `php artisan test --compact --filter=testName`.
 - Do NOT delete tests without approval.
 
-</laravel-boost-guidelines>
+=== clean code rules ===
+
+# Clean Code & Readability
+
+_Project-specific rules — added manually, not part of the auto-generated Laravel Boost package guidelines above. Also saved as `.ai/guidelines/clean-code.md` so it survives `boost:install`/`boost:update` regenerations._
+
+Code is read far more often than it is written. Optimize every change for the next developer who has to understand it without your context — favor clarity over cleverness.
+
+## Functions & Methods
+
+- Each method should do one thing and do it well (Single Responsibility Principle). If describing what a method does requires "and", split it into smaller methods.
+- Keep methods short. When a method grows long or starts mixing concerns, extract the logic into well-named private methods, action classes, or service classes.
+- Prefer early returns and guard clauses over deeply nested `if`/`else` blocks. Avoid nesting more than 2-3 levels deep.
+- Limit the number of parameters a method takes. If it needs more than 3-4, group related parameters into a DTO or value object.
+
+## Duplication & Structure
+
+- Follow DRY: extract repeated logic into reusable methods, traits, services, or query scopes instead of copy-pasting it.
+- Keep classes focused on a single responsibility; split classes that handle more than one concern into smaller, purpose-built classes.
+- Favor composition and dependency injection over tightly coupling classes together.
+
+## Naming & Magic Values
+
+- Names must reveal intent — a reader should understand what a variable, method, or class does without opening its implementation.
+- Avoid magic numbers and strings; use named constants, config values, or Enums so the intent behind a value is explicit.
+
+## Comments
+
+- Code should explain *what* it does through naming and structure. Reserve comments for explaining *why*, especially for non-obvious business logic or trade-offs.
+- Delete comments that only restate the line below them.
+
+## Error Handling
+
+- Handle errors explicitly — never silently swallow an exception.
+- Prefer specific, well-named exceptions over a generic `Exception` so failures communicate intent.
+
+## Before Finishing a Change
+
+- Re-read your diff and ask: would a developer unfamiliar with this code understand it without further explanation? If not, simplify the code first, and only add a comment if simplifying isn't enough.
+- Pint handles formatting (see `pint/core rules`) — don't hand-format code, but make sure the structure itself (naming, method size, nesting) is clean before running it.
+
+# Clean Code & Readability
+
+Code is read far more often than it is written. Optimize every change for the next developer who has to understand it without your context — favor clarity over cleverness.
+
+## Functions & Methods
+
+- Each method should do one thing and do it well (Single Responsibility Principle). If describing what a method does requires "and", split it into smaller methods.
+- Keep methods short. When a method grows long or starts mixing concerns, extract the logic into well-named private methods, action classes, or service classes.
+- Prefer early returns and guard clauses over deeply nested `if`/`else` blocks. Avoid nesting more than 2-3 levels deep.
+- Limit the number of parameters a method takes. If it needs more than 3-4, group related parameters into a DTO or value object.
+
+## Duplication & Structure
+
+- Follow DRY: extract repeated logic into reusable methods, traits, services, or query scopes instead of copy-pasting it.
+- Keep classes focused on a single responsibility; split classes that handle more than one concern into smaller, purpose-built classes.
+- Favor composition and dependency injection over tightly coupling classes together.
+
+## Naming & Magic Values
+
+- Names must reveal intent — a reader should understand what a variable, method, or class does without opening its implementation.
+- Avoid magic numbers and strings; use named constants, config values, or Enums so the intent behind a value is explicit.
+
+## Comments
+
+- Code should explain *what* it does through naming and structure. Reserve comments for explaining *why*, especially for non-obvious business logic or trade-offs.
+- Delete comments that only restate the line below them.
+
+## Error Handling
+
+- Handle errors explicitly — never silently swallow an exception.
+- Prefer specific, well-named exceptions over a generic `Exception` so failures communicate intent.
+
+## Before Finishing a Change
+
+- Re-read your diff and ask: would a developer unfamiliar with this code understand it without further explanation? If not, simplify the code first, and only add a comment if simplifying isn't enough.
+- Pint handles formatting — don't hand-format code, but make sure the structure itself (naming, method size, nesting) is clean before running it.

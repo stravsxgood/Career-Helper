@@ -46,24 +46,24 @@
     @endphp
 
     <main class="min-h-screen pb-28 lg:ml-72 lg:pb-0">
-        <div class="mx-auto max-w-[92rem] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
-            <header class="relative overflow-hidden rounded-[2rem] bg-slate-950 p-5 shadow-2xl shadow-slate-950/[0.12] sm:p-7 lg:p-8">
+        <div class="mx-auto max-w-368 px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
+            <header class="relative overflow-hidden rounded-4xl bg-slate-950 p-5 shadow-2xl shadow-slate-950/12 sm:p-7 lg:p-8">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(66,133,244,0.22),transparent_28%),radial-gradient(circle_at_85%_10%,rgba(52,168,83,0.14),transparent_25%),radial-gradient(circle_at_76%_80%,rgba(251,188,5,0.12),transparent_24%)]"></div>
                 <div class="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-bold text-slate-300 backdrop-blur">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-xs font-bold text-slate-300 backdrop-blur">
                             <span class="h-2 w-2 rounded-full bg-[#34A853] shadow-[0_0_0_6px_rgba(52,168,83,0.13)]"></span>
                             Job market status: active hiring window
                         </div>
                         <h1 class="font-display mt-4 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">Welcome back, {{ Auth::user()->username }}</h1>
                         <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">Your career pipeline is moving. Focus today on roles with the highest fit score and follow up on interviews within the next 24 hours.</p>
                     </div>
-                    <div class="grid gap-3 sm:grid-cols-2 lg:w-[28rem]">
-                        <div class="rounded-[1.45rem] border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
+                    <div class="grid gap-3 sm:grid-cols-2 lg:w-md">
+                        <div class="rounded-[1.45rem] border border-white/10 bg-white/6 p-4 backdrop-blur">
                             <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Next action</p>
                             <p class="mt-2 text-sm font-bold text-white">Send 3 tailored applications</p>
                         </div>
-                        <div class="rounded-[1.45rem] border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
+                        <div class="rounded-[1.45rem] border border-white/10 bg-white/6 p-4 backdrop-blur">
                             <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Resume version</p>
                             <p class="mt-2 text-sm font-bold text-white">Backend v4 · 84% optimized</p>
                         </div>
@@ -81,7 +81,7 @@
                             'red' => 'bg-red-50 text-[#EA4335] ring-red-100',
                         ][$metric['accent']];
                     @endphp
-                    <article class="group overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-950/[0.08] sm:p-5">
+                    <article class="group overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-950/8 sm:p-5">
                         <div class="flex items-start justify-between gap-4">
                             <div>
                                 <p class="text-sm font-semibold text-slate-500">{{ $metric['label'] }}</p>
@@ -102,7 +102,7 @@
             </section>
 
             <section class="mt-5 grid gap-5 xl:grid-cols-[0.86fr_1.14fr]">
-                <article class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                <article class="rounded-4xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <p class="text-sm font-bold text-slate-500">Application Status Distribution</p>
@@ -121,7 +121,7 @@
                     </div>
                 </article>
 
-                <article class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                <article class="rounded-4xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div>
                             <p class="text-sm font-bold text-slate-500">Monthly Profile Impressions & Clicks</p>
@@ -132,12 +132,12 @@
                             <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-extrabold text-slate-600">Clicks</span>
                         </div>
                     </div>
-                    <div class="mt-6 h-[19rem]"><canvas id="profileTrendChart"></canvas></div>
+                    <div class="mt-6 h-76"><canvas id="profileTrendChart"></canvas></div>
                 </article>
             </section>
 
             <section class="mt-5 grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
-                <article class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                <article class="rounded-4xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex items-center justify-between gap-4">
                         <div>
                             <p class="text-sm font-bold text-slate-500">Upcoming Interviews</p>
@@ -155,7 +155,7 @@
                                     'yellow' => 'bg-[#FBBC05] shadow-[0_0_0_7px_rgba(251,188,5,0.13)]',
                                 ][$interview['color']];
                             @endphp
-                            <div class="group relative grid grid-cols-[4.5rem_1fr] gap-4 rounded-[1.55rem] border border-slate-200 bg-slate-50 p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-xl hover:shadow-slate-950/[0.08]">
+                            <div class="group relative grid grid-cols-[4.5rem_1fr] gap-4 rounded-[1.55rem] border border-slate-200 bg-slate-50 p-3 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-xl hover:shadow-slate-950/8">
                                 <div class="rounded-2xl bg-white px-3 py-4 text-center shadow-sm transition duration-300 group-hover:bg-slate-950">
                                     <p class="text-sm font-black text-slate-950 transition duration-300 group-hover:text-white">{{ $interview['time'] }}</p>
                                     <p class="mt-1 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-slate-400">Today</p>
@@ -169,7 +169,7 @@
                                         <p class="mt-1 truncate text-sm font-semibold text-slate-500">{{ $interview['company'] }} · {{ $interview['type'] }}</p>
                                     </div>
                                     <button type="button" class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-slate-500 shadow-sm transition duration-300 hover:bg-blue-50 hover:text-[#4285F4]">
-                                        <svg class="h-[1.125rem] w-[1.125rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+                                        <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
                                     </button>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                     </div>
                 </article>
 
-                <article x-data="{ saved: {} }" class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                <article x-data="{ saved: {} }" class="rounded-4xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                             <p class="text-sm font-bold text-slate-500">Recommended Jobs for You</p>
@@ -188,14 +188,14 @@
 
                     <div class="mt-6 space-y-3">
                         @foreach ($jobs as $index => $job)
-                            <div class="group rounded-[1.55rem] border border-slate-200 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-950/[0.08]">
+                            <div class="group rounded-[1.55rem] border border-slate-200 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-950/8">
                                 <div class="flex items-start justify-between gap-4">
                                     <div class="min-w-0">
                                         <h3 class="truncate text-base font-extrabold tracking-tight text-slate-950">{{ $job['title'] }}</h3>
                                         <p class="mt-1 text-sm font-semibold text-slate-500">{{ $job['company'] }}</p>
                                     </div>
-                                    <button type="button" @click="saved[{{ $index }}] = !saved[{{ $index }}]" class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-slate-200 transition duration-300 hover:-translate-y-0.5" :class="saved[{{ $index }}] ? 'bg-[#FBBC05]/[0.15] text-[#B77900] border-[#FBBC05]/30' : 'bg-slate-50 text-slate-500 hover:bg-slate-950 hover:text-white'" :aria-pressed="saved[{{ $index }}] ? 'true' : 'false'">
-                                        <svg class="h-[1.125rem] w-[1.125rem] transition duration-300" :class="saved[{{ $index }}] ? 'scale-110 fill-current' : ''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 17 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16Z"/></svg>
+                                    <button type="button" @click="saved[{{ $index }}] = !saved[{{ $index }}]" class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-slate-200 transition duration-300 hover:-translate-y-0.5" :class="saved[{{ $index }}] ? 'bg-[#FBBC05]/15 text-[#B77900] border-[#FBBC05]/30' : 'bg-slate-50 text-slate-500 hover:bg-slate-950 hover:text-white'" :aria-pressed="saved[{{ $index }}] ? 'true' : 'false'">
+                                        <svg class="h-4.5 w-4.5 transition duration-300" :class="saved[{{ $index }}] ? 'scale-110 fill-current' : ''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 17 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16Z"/></svg>
                                     </button>
                                 </div>
                                 <div class="mt-4 flex flex-wrap items-center gap-2">

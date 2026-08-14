@@ -57,7 +57,7 @@
 
             @if ($analyses->isEmpty())
                 <div
-                    class="rounded-[2rem] border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm dark:border-white/10 dark:bg-slate-900">
+                    class="rounded-4xl border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm dark:border-white/10 dark:bg-slate-900">
                     <h2 class="text-xl font-black text-slate-950 dark:text-white">
                         Trash masih kosong
                     </h2>

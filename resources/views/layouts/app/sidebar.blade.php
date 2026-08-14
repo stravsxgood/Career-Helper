@@ -19,6 +19,13 @@
                 '<path d="M3 10.75L12 3l9 7.75V21a1 1 0 0 1-1 1h-5.25v-6.25h-5.5V22H4a1 1 0 0 1-1-1V10.75Z"/><path d="M9.25 22v-6.25h5.5V22"/>',
         ],
         [
+            'label' => 'RecordJob',
+            'href' => route('recordjob.index'),
+            'match' => 'recordjob*',
+            'icon' =>
+                '<path d="M3 10.75L12 3l9 7.75V21a1 1 0 0 1-1 1h-5.25v-6.25h-5.5V22H4a1 1 0 0 1-1-1V10.75Z"/><path d="M9.25 22v-6.25h5.5V22"/>',
+        ],
+        [
             'label' => 'Analyze AI',
             'href' => route('analysis'),
             'match' => 'analysis*',
@@ -71,14 +78,14 @@
 <div x-data="{ profileOpen: false, mobileOpen: false }" class="relative z-50">
     <aside
         class="fixed inset-y-0 left-0 hidden w-72 border-r border-white/10 bg-slate-950 text-slate-100 shadow-2xl shadow-slate-950/30 lg:flex lg:flex-col">
-        <div class="absolute inset-0 overflow-hidden rounded-r-[2rem]">
+        <div class="absolute inset-0 overflow-hidden rounded-r-4xl">
             <div class="absolute -left-28 top-24 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"></div>
             <div class="absolute -bottom-28 right-4 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl"></div>
         </div>
 
         <div class="relative flex h-full flex-col px-4 py-5">
             <a href="{{ url('/') }}"
-                class="group mb-8 flex items-center gap-3 rounded-3xl border border-white/10 bg-white/[0.045] p-3 transition duration-300 hover:bg-white/[0.075]">
+                class="group mb-8 flex items-center gap-3 rounded-3xl border border-white/10 bg-white/4.5 p-3 transition duration-300 hover:bg-white/7.5">
                 <span
                     class="career-logo-pulse grid h-11 w-11 place-items-center rounded-2xl bg-white text-slate-950 shadow-lg shadow-blue-500/10">
                     <span class="relative block h-5 w-5 rounded-md bg-[#4285F4]">
@@ -97,10 +104,10 @@
                 @foreach ($navigation as $item)
                     @php $active = request()->is(trim(parse_url($item['href'], PHP_URL_PATH) ?? '', '/') . '*') || request()->routeIs($item['match']); @endphp
                     <a href="{{ $item['href'] }}"
-                        class="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-medium transition duration-300 {{ $active ? 'bg-white text-slate-950 shadow-lg shadow-blue-950/20' : 'text-slate-300 hover:bg-white/[0.07] hover:text-white' }}">
+                        class="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-medium transition duration-300 {{ $active ? 'bg-white text-slate-950 shadow-lg shadow-blue-950/20' : 'text-slate-300 hover:bg-white/7 hover:text-white' }}">
                         <span
-                            class="grid h-9 w-9 place-items-center rounded-xl transition duration-300 {{ $active ? 'bg-slate-950 text-white' : 'bg-white/[0.06] text-slate-300 group-hover:bg-white/[0.11] group-hover:text-white' }}">
-                            <svg class="h-[1.125rem] w-[1.125rem]" viewBox="0 0 24 24" fill="none"
+                            class="grid h-9 w-9 place-items-center rounded-xl transition duration-300 {{ $active ? 'bg-slate-950 text-white' : 'bg-white/6 text-slate-300 group-hover:bg-white/11 group-hover:text-white' }}">
+                            <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
                                 aria-hidden="true">{!! $item['icon'] !!}</svg>
                         </span>
@@ -121,10 +128,10 @@
                     x-transition:leave-end="opacity-0 translate-y-3 scale-95" @click.outside="profileOpen = false"
                     class="absolute bottom-[5.7rem] left-0 right-0 overflow-hidden rounded-[1.45rem] border border-white/10 bg-slate-900/95 p-2 shadow-2xl shadow-slate-950/60 backdrop-blur-xl">
                     <a href="{{ route('profile.edit') }}"
-                        class="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-slate-200 transition duration-300 hover:bg-white/[0.08] hover:text-white">
+                        class="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-slate-200 transition duration-300 hover:bg-white/8 hover:text-white">
                         <span
-                            class="grid h-9 w-9 place-items-center rounded-xl bg-white/[0.06] text-[#34A853] transition duration-300 group-hover:bg-emerald-500/[0.15]">
-                            <svg class="h-[1.125rem] w-[1.125rem] transition duration-500 group-hover:rotate-90"
+                            class="grid h-9 w-9 place-items-center rounded-xl bg-white/6 text-[#34A853] transition duration-300 group-hover:bg-emerald-500/15">
+                            <svg class="h-4.5 w-4.5 transition duration-500 group-hover:rotate-90"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
@@ -137,10 +144,10 @@
                     <form method="POST" action="{{ Route::has('logout') ? route('logout') : url('/logout') }}">
                         @csrf
                         <button type="submit"
-                            class="group flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm font-semibold text-slate-300 transition duration-300 hover:bg-red-500/[0.12] hover:text-red-300">
+                            class="group flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm font-semibold text-slate-300 transition duration-300 hover:bg-red-500/12 hover:text-red-300">
                             <span
-                                class="grid h-9 w-9 place-items-center rounded-xl bg-white/[0.06] text-slate-300 transition duration-300 group-hover:bg-red-500/[0.15] group-hover:text-red-300">
-                                <svg class="h-[1.125rem] w-[1.125rem] transition duration-300 group-hover:translate-x-0.5"
+                                class="grid h-9 w-9 place-items-center rounded-xl bg-white/6 text-slate-300 transition duration-300 group-hover:bg-red-500/15 group-hover:text-red-300">
+                                <svg class="h-4.5 w-4.5 transition duration-300 group-hover:translate-x-0.5"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                     stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -154,7 +161,7 @@
                 </div>
 
                 <button type="button" @click="profileOpen = ! profileOpen" :aria-expanded="profileOpen.toString()"
-                    class="flex w-full items-center gap-3 rounded-[1.45rem] border border-white/10 bg-white/[0.055] p-3 text-left transition duration-300 hover:bg-white/[0.085] focus:outline-none focus:ring-2 focus:ring-blue-400/40">
+                    class="flex w-full items-center gap-3 rounded-[1.45rem] border border-white/10 bg-white/5.5 p-3 text-left transition duration-300 hover:bg-white/8.5 focus:outline-none focus:ring-2 focus:ring-blue-400/40">
                     <span class="min-w-0 flex-1">
                         <span class="block truncate text-sm font-semibold text-white">{{ $displayName }}</span>
                         <span class="block truncate text-xs text-slate-400">{{ $email }}</span>
@@ -172,13 +179,13 @@
     <!-- MOBILE APP -->
 
     <div
-        class="fixed inset-x-3 bottom-3 z-50 rounded-[1.7rem] border border-slate-200/80 bg-white/[0.88] p-2 shadow-2xl shadow-slate-950/[0.15] backdrop-blur-xl lg:hidden">
+        class="fixed inset-x-3 bottom-3 z-50 rounded-[1.7rem] border border-slate-200/80 bg-white/88 p-2 shadow-2xl shadow-slate-950/15 backdrop-blur-xl lg:hidden">
         <div class="grid grid-cols-5 items-center gap-1">
             @foreach (array_slice($navigation, 0, 4) as $item)
                 @php $active = request()->is(trim(parse_url($item['href'], PHP_URL_PATH) ?? '', '/') . '*') || request()->routeIs($item['match']); @endphp
                 <a href="{{ $item['href'] }}"
                     class="group flex min-h-14 flex-col items-center justify-center rounded-2xl px-1 text-[0.68rem] font-semibold transition duration-300 {{ $active ? 'bg-slate-950 text-white' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900' }}">
-                    <svg class="mb-1 h-[1.125rem] w-[1.125rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <svg class="mb-1 h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
                         aria-hidden="true">{!! $item['icon'] !!}</svg>
                     <span class="max-w-[4.3rem] truncate">{{ $item['label'] }}</span>
@@ -197,14 +204,14 @@
         </div>
     </div>
 
-    <div x-show="mobileOpen" x-cloak class="fixed inset-0 z-[60] lg:hidden" aria-modal="true" role="dialog">
+    <div x-show="mobileOpen" x-cloak class="fixed inset-0 z-60 lg:hidden" aria-modal="true" role="dialog">
         <div x-show="mobileOpen" x-transition.opacity class="absolute inset-0 bg-slate-950/50 backdrop-blur-sm"
             @click="mobileOpen = false"></div>
         <section x-show="mobileOpen" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 translate-y-8"
-            class="absolute inset-x-3 bottom-3 overflow-hidden rounded-[2rem] bg-slate-950 p-4 text-white shadow-2xl shadow-slate-950/50">
+            class="absolute inset-x-3 bottom-3 overflow-hidden rounded-4xl bg-slate-950 p-4 text-white shadow-2xl shadow-slate-950/50">
             <div class="flex items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
                     <span
@@ -215,7 +222,7 @@
                     </div>
                 </div>
                 <button type="button" @click="mobileOpen = false"
-                    class="grid h-10 w-10 place-items-center rounded-2xl bg-white/[0.07] text-slate-300 transition hover:bg-white/[0.12] hover:text-white">
+                    class="grid h-10 w-10 place-items-center rounded-2xl bg-white/7 text-slate-300 transition hover:bg-white/12 hover:text-white">
                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round">
                         <path d="M18 6 6 18" />
@@ -227,8 +234,8 @@
             <nav aria-label="Mobile navigation" class="mt-5 grid gap-2">
                 @foreach ($navigation as $item)
                     <a href="{{ $item['href'] }}"
-                        class="flex items-center gap-3 rounded-2xl bg-white/[0.055] px-3 py-3 text-sm font-semibold text-slate-200 transition duration-300 hover:bg-white/[0.1] hover:text-white">
-                        <span class="grid h-10 w-10 place-items-center rounded-xl bg-white/[0.06] text-slate-300">
+                        class="flex items-center gap-3 rounded-2xl bg-white/5.5 px-3 py-3 text-sm font-semibold text-slate-200 transition duration-300 hover:bg-white/10 hover:text-white">
+                        <span class="grid h-10 w-10 place-items-center rounded-xl bg-white/6 text-slate-300">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.9" stroke-linecap="round"
                                 stroke-linejoin="round">{!! $item['icon'] !!}</svg>
@@ -238,7 +245,7 @@
                 @endforeach
             </nav>
 
-            <div class="mt-5 rounded-[1.45rem] border border-white/10 bg-white/[0.055] p-3">
+            <div class="mt-5 rounded-[1.45rem] border border-white/10 bg-white/5.5 p-3">
                 <div class="flex items-center gap-3">
                     <span
                         class="grid h-11 w-11 place-items-center rounded-2xl bg-white text-sm font-bold text-slate-950">{{ $initials }}</span>
@@ -249,13 +256,13 @@
                 </div>
                 <div class="mt-3 grid grid-cols-3 gap-2">
                     <a href="{{ Route::has('profile.show') ? route('profile.show') : url('/profile') }}"
-                        class="rounded-2xl bg-white/[0.07] px-2 py-2 text-center text-xs font-semibold text-slate-200 transition hover:bg-blue-500/[0.15] hover:text-blue-200">View</a>
+                        class="rounded-2xl bg-white/7 px-2 py-2 text-center text-xs font-semibold text-slate-200 transition hover:bg-blue-500/15 hover:text-blue-200">View</a>
                     <a href="{{ Route::has('profile.edit') ? route('profile.edit') : url('/profile/settings') }}"
-                        class="rounded-2xl bg-white/[0.07] px-2 py-2 text-center text-xs font-semibold text-slate-200 transition hover:bg-emerald-500/[0.15] hover:text-emerald-200">Settings</a>
+                        class="rounded-2xl bg-white/7 px-2 py-2 text-center text-xs font-semibold text-slate-200 transition hover:bg-emerald-500/15 hover:text-emerald-200">Settings</a>
                     <form method="POST" action="{{ Route::has('logout') ? route('logout') : url('/logout') }}">
                         @csrf
                         <button type="submit"
-                            class="w-full rounded-2xl bg-white/[0.07] px-2 py-2 text-center text-xs font-semibold text-slate-200 transition hover:bg-red-500/[0.15] hover:text-red-200">Log
+                            class="w-full rounded-2xl bg-white/7 px-2 py-2 text-center text-xs font-semibold text-slate-200 transition hover:bg-red-500/15 hover:text-red-200">Log
                             Out</button>
                     </form>
                 </div>
